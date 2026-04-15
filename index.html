@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Digistry — Stok Produk Digital Siap Jual</title>
+    <meta name="description" content="Digistry adalah stok produk digital siap jual untuk pemula, freelancer, dan reseller yang ingin mulai cepat tanpa bikin dari nol." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box }
+        :root {
+            --bg:#0A0F14; --bg2:#070B10; --sf:rgba(255,255,255,.05); --sfh:rgba(255,255,255,.08);
+            --bd:rgba(255,255,255,.10); --tx:#F6F8F9; --txm:rgba(255,255,255,.65); --txf:rgba(255,255,255,.45);
+            --cy:#6ED7EA; --bl:#2E86F5; --ic:#A9CCD6; --gn:#0d9668; --rd:#d94454; --yl:#f59e0b;
+            --sh:0 10px 40px rgba(0,0,0,.35); --shs:0 2px 12px rgba(0,0,0,.25);
+            --rl:22px; --mx:1140px; --nh:72px; --ft:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+            --primary:#3B82F6; --accent:#6ED7EA; --bg-dark:#020617; --bg-soft:#0A0F14;
+        }
+        html { scroll-behavior:smooth }
+        body {
+            font-family:var(--ft);
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(110,215,234,0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 50%, rgba(46,134,245,0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 20% 80%, rgba(110,215,234,0.08) 0%, transparent 40%),
+                linear-gradient(160deg, #020617 0%, #050d1a 40%, #020b12 70%, #020617 100%);
+            background-attachment:fixed;
+            color:var(--tx); line-height:1.6; -webkit-font-smoothing:antialiased;
+            text-rendering:optimizeLegibility; overflow-x:hidden
+        }
+        a { text-decoration:none; color:inherit }
+        button, input { font:inherit }
+        img { max-width:100%; display:block }
+        section[id] { scroll-margin-top:calc(var(--nh) + 18px) }
+
+        .ct { width:min(calc(100% - 2.5rem), var(--mx)); margin:0 auto }
+        .stats-wide { width:min(calc(100% - 2.5rem), 1200px); margin:0 auto }
+        .sc { padding:5rem 0 }
+        .sct { padding:3.2rem 0 }
+
+        .gt { background:linear-gradient(90deg,var(--ic),var(--cy) 40%,var(--bl)); -webkit-background-clip:text; background-clip:text; color:transparent }
+        .ki { display:inline-flex; align-items:center; gap:.55rem; padding:.46rem .78rem; border-radius:999px; background:var(--sf); border:1px solid var(--bd); font-size:.76rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--cy) }
+        .ki .dot { width:8px; height:8px; border-radius:50%; background:var(--gn); box-shadow:0 0 0 6px rgba(13,150,104,.2) }
+        .sh { max-width:720px; margin-bottom:1.6rem }
+        .sh.c { text-align:center; margin-inline:auto }
+        .sh h2 { font-size:clamp(1.8rem,4vw,3rem); line-height:1.04; letter-spacing:-.05em; font-weight:800; margin:.9rem 0 .7rem; text-wrap:balance }
+        .sh p { font-size:1rem; color:var(--txm); max-width:62ch }
+        .sh.c p { margin-inline:auto }
+
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:.62rem; min-height:54px; padding:0 1.25rem; border:none; border-radius:16px; font-weight:800; font-size:1rem; cursor:pointer; transition:transform .2s,background .2s,box-shadow .2s }
+        .btn:active { transform:translateY(1px) scale(.995) }
+        .btn svg { width:18px; height:18px; flex:0 0 18px }
+        .bp { background:linear-gradient(135deg,var(--accent),var(--primary)); color:var(--bg-dark); box-shadow:0 10px 30px rgba(59,130,246,0.25),0 0 20px rgba(110,215,234,0.2); transition:all 0.3s ease }
+        .bp:hover { transform:translateY(-2px); box-shadow:0 15px 40px rgba(59,130,246,0.35),0 0 30px rgba(110,215,234,0.25) }
+        .bs { background:var(--sf); color:var(--tx); border:1px solid var(--bd) }
+        .bs:hover { background:var(--sfh); box-shadow:var(--shs) }
+        .bw { width:100% }
+
+        .rv { opacity:0; transform:translateY(24px); transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1) }
+        .rv.v { opacity:1; transform:none }
+        .rv.d1 { transition-delay:.07s }
+        .rv.d2 { transition-delay:.14s }
+        .rv.d3 { transition-delay:.21s }
+
+        @keyframes mq { 0% { transform:translateX(0) } 100% { transform:translateX(-50%) } }
+        @keyframes fl { 0%,100% { opacity:1 } 50% { opacity:.5 } }
+        .iw { width:46px; height:46px; border-radius:15px; display:grid; place-items:center; margin-bottom:.85rem; font-size:1.15rem }
+
+        /* NAV */
+        .nav { position:sticky; top:0; z-index:90; height:var(--nh); background:rgba(10,15,20,.85); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--bd) }
+        .nav-i { height:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem }
+        .br { display:flex; align-items:center; gap:.78rem }
+        .br svg { width:34px; height:34px; flex:0 0 34px }
+        .br strong { display:block; font-size:1rem; letter-spacing:-.03em; line-height:1.1 }
+        .br span { display:block; font-size:.76rem; color:var(--txf); font-weight:700; margin-top:.08rem }
+        .br img { width:36px; height:36px; border-radius:50%; object-fit:cover }
+        .nl { display:flex; align-items:center; gap:1.5rem }
+        .nl a { font-size:.88rem; font-weight:600; color:var(--txm); transition:color .15s }
+        .nl a:hover { color:var(--tx) }
+        .nav .btn { min-height:46px; padding:0 1rem; font-size:.95rem }
+        .nr { display:flex; align-items:center; gap:.75rem }
+        .nav-i {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+         padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+    
+        
+                /* MARQUEE */
+        .mb { border-bottom:1px solid var(--bd); background:var(--bg2); overflow:hidden; white-space:nowrap; padding:.55rem 0; font-size:.82rem; font-weight:600; color:var(--txm) }
+        .mt { width:max-content; animation:mq 24s linear infinite; display:inline-flex; align-items:center; gap:2rem }
+        .mt .mi { display:inline-flex; align-items:center; gap:.55rem }
+        .mt .mi::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--cy); opacity:.7 }
+
+        /* HERO */
+        .hero-new { position:relative; padding:5rem 1.5rem 0; text-align:center; overflow:hidden; display:flex; flex-direction:column; align-items:center }
+        .hero-badge { position:relative; z-index:2; display:inline-flex; align-items:center; gap:.55rem; padding:.46rem .9rem; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10); font-size:.76rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--cy); margin-bottom:1.8rem }
+        .hero-badge .dot { width:8px; height:8px; border-radius:50%; background:var(--gn); box-shadow:0 0 0 6px rgba(13,150,104,.2) }
+        .hero-headline { position:relative; z-index:2; font-size:clamp(2.4rem,6vw,5rem); font-weight:800; line-height:1.18; letter-spacing:-.06em; max-width:28ch; margin:0 auto 1rem }
+        .hero-headline .line1 { color:var(--tx) }
+        .hero-headline .line2 { background:linear-gradient(90deg,var(--cy),var(--bl)); -webkit-background-clip:text; background-clip:text; color:transparent; display:block; margin-top:.1em }
+        .hero-sub { position:relative; z-index:2; font-size:1.05rem; color:var(--txm); max-width:52ch; margin:0 auto 2rem; line-height:1.65 }
+        .hero-pills { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; gap:1.2rem; flex-wrap:wrap; margin-bottom:3rem }
+        .hero-pill { display:inline-flex; align-items:center; gap:.5rem; font-size:.9rem; font-weight:700; color:var(--txm) }
+        .hero-pill .chk { width:22px; height:22px; border-radius:50%; background:var(--cy); display:grid; place-items:center; flex:0 0 22px }
+        .hero-pill .chk svg { width:12px; height:12px; color:#020617 }
+
+        /* ══════════════════════════════════════
+           SHOWCASE — CINEMATIC SEAMLESS
+           Kunci: mask top+bottom+kiri+kanan,
+           gambar cover gelap, shadow bottom fade
+        ══════════════════════════════════════ */
+        .showcase-cinematic {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            padding: 2rem 0 0;
+            /* INI KUNCI 1: fade kiri-kanan sekaligus atas-bawah */
+            -webkit-mask-image:
+                linear-gradient(
+                    to right,
+                    transparent 0%,
+                    black 12%,
+                    black 88%,
+                    transparent 100%
+                );
+            mask-image:
+                linear-gradient(
+                    to right,
+                    transparent 0%,
+                    black 12%,
+                    black 88%,
+                    transparent 100%
+                );
+        }
+
+
+
+        /* INI KUNCI 2: overlay fade bawah ke bg — bikin buku "larut" ke bawah */
+.section-below {
+  background: #071226;
+}
+
+        /* INI KUNCI 3: glow tengah cyan */
+        .showcase-cinematic::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 60%; height: 180px;
+            background: radial-gradient(ellipse at center bottom,
+                rgba(110,215,234,0.10) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes scrollLoop {
+            0%   { transform: translateX(0) }
+            100% { transform: translateX(-50%) }
+        }
+
+        .showcase-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: scrollLoop 30s linear infinite;
+            align-items: flex-end; /* bawah rata */
+            padding: 0 10px 0;
+        }
+
+        .showcase-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* INI KUNCI 4: item tanpa border/shadow terang, bg gelap natural */
+        .showcase-item {
+            flex: 0 0 auto;
+            width: 200px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 14px;
+            /* Shadow gelap saja — tidak ada border terang */
+            box-shadow:
+                0 24px 48px rgba(0,0,0,0.6),
+                0 8px 16px rgba(0,0,0,0.4);
+            /* INI KUNCI 5: sisi kiri-kanan item sendiri juga fade */
+            -webkit-mask-image: linear-gradient(
+                to right,
+                rgba(0,0,0,0.6) 0%,
+                black 15%,
+                black 85%,
+                rgba(0,0,0,0.6) 100%
+            );
+            mask-image: linear-gradient(
+                to right,
+                rgba(0,0,0,0.6) 0%,
+                black 15%,
+                black 85%,
+                rgba(0,0,0,0.6) 100%
+            );
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow:
+                0 32px 60px rgba(0,0,0,0.65),
+                0 0 30px rgba(110,215,234,0.15);
+        }
+
+        /* STATS */
+        .pg { display:grid; grid-template-columns:repeat(4,1fr); border-radius:999px; overflow:hidden; background:linear-gradient(145deg,rgba(59,130,246,0.15),rgba(255,255,255,0.03)); backdrop-filter:blur(12px) }
+        .pi { text-align:center; padding:16px 10px; background:linear-gradient(145deg,rgba(59,130,246,0.08),rgba(255,255,255,0.02)); border:1px solid rgba(59,130,246,0.15) }
+        .pi:not(:last-child) { border-right:1px solid rgba(255,255,255,0.08) }
+        .pi .n { font-size:1.8rem; font-weight:800 }
+        .pi .l { font-size:.85rem; opacity:.7 }
+
+        .sb { display:grid; grid-template-columns:1.05fr .95fr; gap:1rem; align-items:stretch }
+        .pn { background:var(--sf); border:1px solid var(--bd); border-radius:24px; box-shadow:var(--shs); padding:1.15rem }
+        .pn h3 { font-size:1.06rem; letter-spacing:-.02em; line-height:1.3; margin-bottom:.42rem }
+        .pn p { font-size:.94rem; color:var(--txm) }
+        .pcg { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem }
+        .pc { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs); position:relative; overflow:hidden }
+        .pc::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--rd); opacity:.7 }
+        .pc h3,.bc h3,.sc2 h3,.ic2 h3,.fc h3 { font-size:1.02rem; line-height:1.28; letter-spacing:-.02em; margin-bottom:.38rem }
+        .pc p,.bc p,.sc2 p,.ic2 p,.fc p { font-size:.92rem; color:var(--txm) }
+        .bc { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
+        .bm { display:inline-flex; align-items:center; gap:.42rem; padding:.38rem .65rem; border-radius:999px; font-size:.77rem; font-weight:800; margin-bottom:.7rem }
+        .sc2 { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
+        .sn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; font-size:.9rem; font-weight:800; background:rgba(110,215,234,.12); color:var(--cy); margin-bottom:.75rem }
+        .sab { max-width:720px; margin:0 auto; padding:1.35rem; border-radius:24px; background:rgba(110,215,234,.04); border:2px dashed rgba(110,215,234,.18); text-align:center }
+        .sag { display:grid; grid-template-columns:repeat(3,1fr); gap:.78rem; margin-bottom:.4rem }
+        .sai { padding:1rem .8rem; border-radius:18px; text-align:center; background:var(--sf); border:1px solid var(--bd); box-shadow:var(--shs) }
+        .sai .iw { margin:0 auto .5rem }
+        .sai strong { display:block; font-size:.88rem; line-height:1.3 }
+        .sai .sm { display:block; font-size:.78rem; color:var(--txf); margin-top:.12rem }
+        .fc { background:linear-gradient(145deg,rgba(59,130,246,0.08),rgba(255,255,255,0.02)); border:1px solid rgba(59,130,246,0.15); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
+        .fc.good { background:rgba(13,150,104,.06); border-color:rgba(13,150,104,.2) }
+        .fc.bad { background:rgba(217,68,84,.06); border-color:rgba(217,68,84,.2) }
+        .ft2 { display:inline-flex; align-items:center; gap:.42rem; padding:.38rem .65rem; border-radius:999px; font-size:.77rem; font-weight:800; margin-bottom:.7rem }
+        .fc.good .ft2 { background:rgba(13,150,104,.15); color:var(--gn) }
+        .fc.bad .ft2 { background:rgba(217,68,84,.12); color:var(--rd) }
+        .ls { list-style:none; display:grid; gap:.62rem; margin-top:.9rem }
+        .ls li { display:flex; align-items:flex-start; gap:.62rem; font-size:.9rem; color:var(--txm) }
+        .ls li svg { width:18px; height:18px; flex:0 0 18px; margin-top:.08rem }
+        .ic2 { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
+        .tg { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem }
+        .tc { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
+        .ts { font-size:.86rem; color:var(--yl); letter-spacing:1px; margin-bottom:.72rem }
+        .tt { font-size:.95rem; line-height:1.72; color:var(--tx); margin-bottom:.95rem }
+        .ta { display:flex; align-items:center; gap:.82rem }
+        .av { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:.86rem; font-weight:800; flex:0 0 42px }
+        .an { font-size:.9rem; font-weight:700 }
+        .ar { font-size:.8rem; color:var(--txf) }
+        .rb { display:inline-flex; align-items:center; gap:.4rem; padding:.34rem .6rem; border-radius:999px; background:rgba(13,150,104,.12); color:var(--gn); font-size:.74rem; font-weight:800; margin-top:.42rem }
+        .rf { max-width:700px; margin:0 auto; padding:1.6rem; border-radius:24px; background:var(--sf); border:1px solid var(--bd); box-shadow:var(--shs) }
+        .rg { display:grid; grid-template-columns:1fr auto 1fr; gap:.8rem; align-items:center; margin:.9rem 0 }
+        .rc { text-align:center; padding:.8rem; border-radius:16px; background:rgba(255,255,255,.03); border:1px solid var(--bd) }
+        .rc strong { display:block; font-size:1.5rem; font-weight:800; letter-spacing:-.04em; line-height:1.1 }
+        .rc span { display:block; font-size:.78rem; color:var(--txm); margin-top:.2rem }
+        .rvs { font-size:.82rem; font-weight:800; color:var(--txf); padding:.4rem .7rem; border-radius:999px; background:var(--sf); border:1px solid var(--bd) }
+        .vr { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-top:.75rem }
+        .vc { padding:.35rem .65rem; border-radius:999px; font-size:.76rem; font-weight:700; background:var(--sf); border:1px solid var(--bd); color:var(--txm) }
+        .vc b { color:var(--tx) }
+        .pw { max-width:840px; margin:0 auto }
+        .oi { display:grid; grid-template-columns:repeat(3,1fr); gap:.78rem; margin-top:1.2rem }
+        .oi .mi2 { padding:1rem .96rem; border-radius:18px; background:var(--sf); border:1px solid var(--bd); box-shadow:var(--shs) }
+        .oi strong { display:block; font-size:.94rem; line-height:1.25; margin-bottom:.25rem }
+        .oi span { display:block; font-size:.83rem; color:var(--txm); line-height:1.55 }
+        .card-glow { padding:2px; border-radius:26px; background:linear-gradient(135deg,#7FE8F6,#3BA7FF,#1E6BFF,#6EFAC8) }
+        .card-inner { background:#020617; border-radius:24px; padding:1.15rem; width:100%; height:100% }
+        .oc { padding:1.35rem; border-radius:30px; box-shadow:0 16px 42px rgba(110,215,234,.08); position:relative; overflow:hidden; background:transparent }
+        .oc::before { content:''; position:absolute; left:50%; top:-110px; transform:translateX(-50%); width:520px; height:240px; background:radial-gradient(circle,rgba(110,215,234,.08),transparent 68%); pointer-events:none }
+        .otr { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; position:relative }
+        .oh { min-width:0; flex:1 1 360px }
+        .ob2 { display:inline-flex; align-items:center; padding:.46rem .9rem; border-radius:999px; background:var(--cy); color:#0A0F14; font-size:.76rem; font-weight:800; letter-spacing:.04em; white-space:nowrap; box-shadow:0 10px 22px rgba(110,215,234,.18) }
+        .otl { font-size:1.18rem; font-weight:800; line-height:1.2 }
+        .osb { font-size:.96rem; color:var(--txm); margin-top:.42rem; line-height:1.72 }
+        .op { display:flex; align-items:flex-end; justify-content:center; gap:.36rem; margin:1.18rem 0 .3rem; position:relative; z-index:1 }
+        .op .rp { font-size:1.12rem; font-weight:700; color:var(--txm); margin-bottom:.38rem }
+        .op .nm { font-size:3.95rem; font-weight:800; line-height:.9; letter-spacing:-.07em }
+        .om { text-align:center; font-size:.9rem; color:var(--txf) }
+        .ops { display:flex; flex-wrap:wrap; gap:.55rem; justify-content:center; margin:1rem 0 }
+        .opl { padding:.52rem .78rem; border-radius:999px; background:var(--sf); border:1px solid var(--bd); font-size:.82rem; font-weight:700; color:var(--tx) }
+        .ogg { display:grid; grid-template-columns:repeat(2,1fr); gap:.78rem; margin-top:1rem }
+        .oii { display:flex; align-items:flex-start; gap:.72rem; padding:.95rem; border-radius:20px; background:var(--sf); border:1px solid var(--bd); box-shadow:var(--shs) }
+        .oii svg { width:18px; height:18px; flex:0 0 18px; color:var(--gn); margin-top:.16rem }
+        .oii strong { display:block; font-size:.92rem; line-height:1.25; margin-bottom:.16rem }
+        .oii span { display:block; font-size:.82rem; color:var(--txm); line-height:1.55 }
+        .ocn { text-align:center; font-size:.86rem; color:var(--txf); margin-top:.8rem }
+        .ab { display:grid; grid-template-columns:repeat(3,1fr); gap:.78rem; margin-top:1rem }
+        .as2 { padding:.95rem; border-radius:18px; background:var(--sf); border:1px solid var(--bd) }
+        .asn { width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:rgba(110,215,234,.12); color:var(--cy); font-size:.82rem; font-weight:800; margin-bottom:.46rem }
+        .as2 strong { display:block; font-size:.9rem; line-height:1.25; margin-bottom:.16rem }
+        .as2 span { display:block; font-size:.8rem; color:var(--txm); line-height:1.55 }
+        .reb { display:flex; gap:.78rem; align-items:flex-start; padding:1rem; border-radius:18px; background:var(--sf); border:1px solid var(--bd); margin-top:1rem }
+        .reb svg { width:18px; height:18px; flex:0 0 18px; color:var(--cy); margin-top:.08rem }
+        .reb p { font-size:.86rem; color:var(--txm); line-height:1.65 }
+        .gub { display:flex; gap:.72rem; align-items:flex-start; padding:.9rem; border-radius:16px; background:rgba(13,150,104,.08); border:1px solid rgba(13,150,104,.15); margin-top:.8rem }
+        .gub svg { width:18px; height:18px; flex:0 0 18px; color:var(--gn); margin-top:.06rem }
+        .gub p { font-size:.82rem; color:rgba(110,215,234,.85); line-height:1.55 }
+        .fl { display:grid; gap:.75rem }
+        .fi { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); overflow:hidden }
+        .fb { width:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 1.1rem; background:transparent; border:none; text-align:left; font-size:.96rem; font-weight:700; cursor:pointer; color:var(--tx) }
+        .fb svg { width:20px; height:20px; color:var(--txf); flex:0 0 20px; transition:transform .22s ease }
+        .fi.open .fb svg { transform:rotate(180deg) }
+        .fp { max-height:0; overflow:hidden; transition:max-height .28s ease }
+        .fpi { padding:0 1.1rem 1rem; font-size:.9rem; color:var(--txm) }
+        .fct { text-align:center; padding:5rem 0 6rem; position:relative }
+        .fct::before { content:''; position:absolute; left:50%; bottom:-150px; transform:translateX(-50%); width:460px; height:280px; border-radius:50%; background:radial-gradient(circle,rgba(110,215,234,.08),transparent 70%); pointer-events:none }
+        .fca { display:flex; justify-content:center; gap:.85rem; flex-wrap:wrap; margin-top:1.35rem }
+        .foot { border-top:1px solid var(--bd); padding:1.4rem 0 1.8rem; text-align:center; font-size:.84rem; color:var(--txf) }
+        .stb { position:fixed; left:0; right:0; bottom:0; z-index:120; padding:.75rem .9rem max(.75rem,env(safe-area-inset-bottom)); background:linear-gradient(180deg,rgba(10,15,20,0),rgba(10,15,20,.95) 28%,rgba(10,15,20,.99)); transform:translateY(115%); transition:transform .25s ease; pointer-events:none }
+        .stb.show { transform:translateY(0); pointer-events:auto }
+        .stc { max-width:760px; margin:0 auto; padding:.72rem; border-radius:18px; background:rgba(255,255,255,.06); border:1px solid var(--bd); box-shadow:var(--sh); display:flex; align-items:center; gap:.72rem; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px) }
+        .stcp { flex:1; min-width:0 }
+        .stcp strong { display:block; font-size:.92rem; line-height:1.2 }
+        .stcp span { display:block; font-size:.8rem; color:var(--txf); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+        .stp { font-size:1rem; font-weight:800; letter-spacing:-.03em; white-space:nowrap }
+        .stc .btn { min-height:46px; padding:0 1rem; font-size:.92rem; white-space:nowrap }
+        .g2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem }
+        .g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem }
+
+        /* FOOTER */
+        .footer-clean { position:relative; margin-top:6rem; padding:3rem 0 1.5rem; border-top:1px solid rgba(255,255,255,0.08) }
+        .footer-clean::before { content:''; position:absolute; left:50%; top:-80px; transform:translateX(-50%); width:500px; height:200px; background:radial-gradient(circle,rgba(59,130,246,0.12),transparent 70%); pointer-events:none }
+        .footer-wrap { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:2rem }
+        .footer-brand .logo { display:flex; gap:.8rem; align-items:center; margin-bottom:1rem }
+        .logo-box { width:40px; height:40px; border-radius:50%; overflow:hidden }
+        .logo-box img { width:100%; height:100%; object-fit:cover }
+        .footer-brand p { font-size:.9rem; color:rgba(255,255,255,0.6); max-width:260px }
+        .footer-nav h4,.footer-social h4 { font-size:.85rem; margin-bottom:.6rem; color:rgba(255,255,255,0.7) }
+        .footer-nav a,.footer-social a { display:block; font-size:.85rem; margin-bottom:.4rem; color:rgba(255,255,255,0.5); transition:.2s }
+        .footer-nav a:hover,.footer-social a:hover { color:#6ED7EA }
+        .footer-bottom { margin-top:2rem; text-align:center; font-size:.8rem; color:rgba(255,255,255,0.4) }
+
+        @media(max-width:1080px) {
+            .sb { grid-template-columns:1fr }
+            .pcg { grid-template-columns:repeat(2,1fr) }
+            .tg { grid-template-columns:repeat(2,1fr) }
+            .otr { flex-direction:column; align-items:flex-start }
+            .nl { display:none }
+            .footer-wrap { grid-template-columns:1fr 1fr }
+        }
+        @media(max-width:767px) {
+            :root { --nh:64px }
+            .ct,.stats-wide { width:min(1200px, calc(100vw - 120px)) }
+            .sc { padding:3.6rem 0 }
+            .sct { padding:2.6rem 0 }
+            .nav .btn { min-height:44px; padding:0 .92rem; font-size:.9rem }
+            .br span { display:none }
+            .hero-new { padding:3.5rem 1rem 0 }
+            .hero-headline { font-size:clamp(2rem,9vw,2.8rem) }
+            .hero-pills { gap:.75rem }
+            .showcase-item { width:150px; height:200px }
+            .g2,.g3,.oi,.ogg,.ab,.tg,.sag { grid-template-columns:1fr }
+            .sb { grid-template-columns:1fr }
+            .pg { grid-template-columns:repeat(2,1fr); border-radius:20px }
+            .pcg { grid-template-columns:1fr }
+            .oc { padding:1.02rem .96rem }
+            .otl { font-size:1.1rem }
+            .osb { font-size:.91rem; line-height:1.65 }
+            .op .nm { font-size:3.02rem }
+            .ops { justify-content:flex-start }
+            .opl { width:100% }
+            .reb { flex-direction:column }
+            .fca { flex-direction:column }
+            .fca .btn { width:100% }
+            .stp { display:none }
+            .foot { padding-bottom:7rem }
+            .rg { grid-template-columns:1fr; gap:.5rem }
+            .rvs { margin:.15rem auto }
+            .footer-wrap { grid-template-columns:1fr }
+        }
+        @media(max-width:420px) {
+            .ct { width:min(calc(100% - 1.4rem),var(--mx)) }
+            .ki { font-size:.71rem }
+            .fb { padding:.95rem 1rem }
+            .op .nm { font-size:2.56rem }
+            .ob2 { font-size:.7rem; padding:.42rem .72rem }
+            .stc .btn { min-height:44px; padding:0 .9rem }
+        }
+        @media(prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto }
+            .rv,.rv.v { opacity:1; transform:none; transition:none }
+            .mt,.showcase-track { animation:none }
+        }
+
+        .wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.wa-icon {
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.wa-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.wa-icon:hover {
+  transform: scale(1.1);
+}
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/628883662930?text=Halo%20saya%20tertarik%20dengan%20Digistry" 
+   class="wa-float" 
+   target="_blank">
+
+  <div class="wa-icon">
+    <svg viewBox="0 0 32 32" fill="white">
+      <path d="M16 .396C7.164.396 0 7.56 0 16.396c0 2.888.756 5.59 2.068 7.94L.396 32l7.84-1.64A15.93 15.93 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836.396 16 .396zm0 29.204c-2.52 0-4.88-.66-6.92-1.8l-.5-.3-4.66.98.98-4.54-.32-.52a13.36 13.36 0 0 1-2.04-7.02c0-7.38 6-13.38 13.46-13.38s13.46 6 13.46 13.38-6 13.38-13.46 13.38zm7.4-9.94c-.4-.2-2.36-1.16-2.72-1.3-.36-.14-.62-.2-.88.2s-1 1.3-1.22 1.56c-.22.26-.44.3-.82.1-.38-.2-1.6-.6-3.04-1.92-1.12-1-1.88-2.24-2.1-2.62-.22-.38-.02-.58.18-.78.18-.18.4-.46.6-.7.2-.24.26-.4.4-.66.14-.26.08-.48-.04-.68-.12-.2-.88-2.12-1.2-2.9-.32-.76-.64-.66-.88-.66h-.76c-.26 0-.68.1-1.04.48s-1.36 1.32-1.36 3.22c0 1.9 1.4 3.74 1.6 4 .2.26 2.76 4.22 6.7 5.76.94.4 1.68.64 2.26.82.94.3 1.8.26 2.48.16.76-.12 2.36-.96 2.7-1.88.34-.92.34-1.7.24-1.88-.1-.18-.36-.28-.76-.48z"/>
+    </svg>
+  </div>
+
+</a>
+
+    <div class="mb">
+        <div class="mt"><span class="mi">Sekali bayar • akses instan • tanpa biaya bulanan</span><span class="mi">Lisensi lebih jelas • mulai lebih tenang</span><span class="mi">500+ stok siap pilih • 50+ kategori niche</span><span class="mi">Support tersedia saat kamu mentok</span><span class="mi">Mulai dari 1 produk dulu</span><span class="mi">Sekali bayar • akses instan • tanpa biaya bulanan</span><span class="mi">Lisensi lebih jelas • mulai lebih tenang</span><span class="mi">500+ stok siap pilih • 50+ kategori niche</span><span class="mi">Support tersedia saat kamu mentok</span><span class="mi">Mulai dari 1 produk dulu</span></div>
+    </div>
+
+    <nav class="nav">
+        <div class="ct">
+            <div class="nav-i">
+                <div class="br">
+                    <img src="logo.jpeg" alt="Digistry Logo">
+                    <div><strong>Digistry</strong><span>stok produk digital siap jual</span></div>
+                </div>
+                <div class="nl">
+                    <a href="#inside">Isi Masterkit</a><a href="#steps">Cara Mulai</a>
+                    <a href="#testi">Testimoni</a><a href="#pricing">Harga</a><a href="#faq">FAQ</a>
+                </div>
+                <div class="nr"><a href="#pricing" class="btn bp">Lihat Harga</a></div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-new">
+        <div class="hero-badge"><span class="dot"></span> stok digital siap jual • sekali bayar</div>
+        <h1 class="hero-headline">
+            <span class="line1">Punya stok produk digital</span>
+            <span class="line2">siap jual tanpa mulai dari nol</span>
+        </h1>
+        <p class="hero-sub">Digistry bantu kamu mulai lebih cepat. Sudah ada produk digital yang bisa di-rebrand, panduan jualnya, dan support kalau kamu masih bingung harus mulai dari mana.</p>
+        <div class="hero-pills">
+            <div class="hero-pill"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>500+ stok siap jual</div>
+            <div class="hero-pill"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Lisensi jelas &amp; aman</div>
+            <div class="hero-pill"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>Sekali bayar selamanya</div>
+        </div>
+
+        <div class="showcase-cinematic">
+           <div class="showcase-track">
+  <img src="1.png" class="showcase-item">
+  <img src="2.png" class="showcase-item">
+  <img src="3.png" class="showcase-item">
+  <img src="4.png" class="showcase-item">
+  <img src="new5.png" class="showcase-item">
+  <img src="6.png" class="showcase-item">
+  <img src="7.png" class="showcase-item">
+  <img src="8.png" class="showcase-item">
+  <img src="9.png" class="showcase-item">
+  <img src="10.png" class="showcase-item">
+
+  <!-- duplicate buat infinite scroll -->
+  <img src="1.png" class="showcase-item">
+  <img src="2.png" class="showcase-item">
+  <img src="3.png" class="showcase-item">
+  <img src="4.png" class="showcase-item">
+  <img src="new5.png" class="showcase-item">
+  <img src="6.png" class="showcase-item">
+  <img src="7.png" class="showcase-item">
+  <img src="8.png" class="showcase-item">
+  <img src="9.png" class="showcase-item">
+  <img src="10.png" class="showcase-item">
+
+</div>
+        </div>
+    </section>
+
+    <section class="sct">
+        <div class="stats-wide">
+            <div class="pg rv">
+                <div class="pi"><div class="n" data-count="500">500+</div><div class="l">produk digital</div></div>
+                <div class="pi"><div class="n" data-count="2800">2.8K+</div><div class="l">pengguna Digistry</div></div>
+                <div class="pi"><div class="n" data-count="50">50+</div><div class="l">kategori niche</div></div>
+                <div class="pi"><div class="n">24/7</div><div class="l">support chat</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct">
+        <div class="stats-wide sb rv">
+            <div class="pn"><h3>Seringnya bukan tidak mau mulai, tapi bingung mulai dari mana</h3><p>Masalahnya biasanya sama: harus bikin produk sendiri, masih ragu soal lisensi, dan belum kebayang cara jualnya dengan rapi.</p></div>
+            <div class="pn" style="background:rgba(110,215,234,.06);border-color:rgba(110,215,234,.18)"><h3>Digistry bikin langkah awal jadi lebih ringan</h3><p>Kamu tidak perlu mulai dari kosong. Tinggal pilih produk yang paling cocok, rapikan branding seperlunya, lalu mulai tawarkan.</p></div>
+        </div>
+    </section>
+
+    <section class="sc">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> hambatan utama</span>
+                <h2>Kenapa banyak orang niat jualan digital tapi tidak jadi mulai?</h2>
+                <p>Bukan karena malas. Biasanya karena waktunya kepotong, takut salah, atau belum tahu produk apa yang mau dijual duluan.</p>
+            </div>
+            <div class="pcg">
+                <div class="pc rv"><h3>Bikin produk sendiri makan waktu</h3><p>Baru mau mulai saja sudah ketemu riset, desain, revisi, dan produksi.</p></div>
+                <div class="pc rv d1"><h3>Takut soal lisensi dan hak jual</h3><p>Takut salah pakai, tidak boleh rebrand, atau bingung kalau ditanya legalitas produknya.</p></div>
+                <div class="pc rv d2"><h3>Belum siap masuk yang terlalu ribet</h3><p>Pengen mulai, tapi belum siap kalau semuanya terasa teknis dan bikin pusing.</p></div>
+                <div class="pc rv d3"><h3>Belum tahu mau jual apa dulu</h3><p>Niat ada, tapi belum pegang stok dan belum punya langkah pertama yang jelas.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sc" id="inside">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> isi masterkit</span>
+                <h2>Isi paketnya bukan cuma file. Ini bekal buat bantu kamu mulai lebih cepat.</h2>
+                <p>Kamu dapat stok produk, bahan branding, panduan, dan support.</p>
+            </div>
+            <div class="g2">
+                <div class="bc rv"><div class="iw" style="background:rgba(110,215,234,.12);color:var(--cy)">📘</div><div class="bm" style="background:rgba(110,215,234,.12);color:var(--cy)">200+ item</div><h3>E-book &amp; e-course</h3><p>Topiknya beragam dan lebih gampang dikemas ulang jadi penawaran yang layak jual.</p></div>
+                <div class="bc rv d1"><div class="iw" style="background:rgba(255,107,53,.09);color:#ff6b35">🎨</div><div class="bm" style="background:rgba(255,107,53,.09);color:#ff6b35">150+ item</div><h3>Template desain</h3><p>Bisa kamu edit nama, cover, atau tampilannya supaya lebih cocok dengan brandingmu.</p></div>
+                <div class="bc rv"><div class="iw" style="background:rgba(13,150,104,.12);color:var(--gn)">📈</div><div class="bm" style="background:rgba(13,150,104,.12);color:var(--gn)">100+ item</div><h3>Toolkit bisnis</h3><p>File praktis yang enak dijual karena dipakai sehari-hari oleh banyak orang.</p></div>
+                <div class="bc rv d1"><div class="iw" style="background:rgba(139,92,246,.09);color:#8B5CF6">🤝</div><div class="bm" style="background:rgba(139,92,246,.09);color:#8B5CF6">support &amp; panduan</div><h3>Ada panduan dan support</h3><p>Jadi kamu tidak cuma dapat bahan, tapi juga tahu langkah awal yang perlu dikerjakan.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct" id="steps">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> 3 langkah mulai</span>
+                <h2>Cara mulainya simpel, jadi tidak perlu nunggu semuanya sempurna</h2>
+                <p>Mulai dari yang paling ringan dulu.</p>
+            </div>
+            <div class="g3">
+                <div class="sc2 rv"><div class="sn">1</div><h3>Pilih yang paling mudah kamu jual</h3><p>Ambil satu yang paling kamu paham atau paling dekat dengan targetmu.</p></div>
+                <div class="sc2 rv d1"><div class="sn" style="background:rgba(255,107,53,.09);color:#ff6b35">2</div><h3>Rapikan branding seperlunya</h3><p>Ubah nama, cover, atau tampilan dasar supaya lebih layak ditawarkan.</p></div>
+                <div class="sc2 rv d2"><div class="sn" style="background:rgba(13,150,104,.12);color:var(--gn)">3</div><h3>Upload, tawarkan, lalu mulai closing</h3><p>Mulai dari WhatsApp, Instagram, marketplace, atau channel favoritmu.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sc" id="fit">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> target yang paling pas</span>
+                <h2>Siapa yang paling cocok pakai Digistry?</h2>
+                <p>Tidak semua orang cocok, dan itu justru bagus.</p>
+            </div>
+            <div class="g2">
+                <div class="fc good rv"><div class="ft2">✓ Cocok untuk</div><h3>Cocok kalau kamu ingin mulai cepat</h3><p>Digistry paling terasa manfaatnya buat orang yang ingin punya stok digital dulu, lalu belajar jual sambil jalan.</p>
+                    <ul class="ls">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Mahasiswa, pekerja, atau ibu rumah tangga yang ingin mulai pelan-pelan</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Freelancer, admin sosmed, atau creator yang ingin punya produk sendiri</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Reseller yang butuh stok cepat tanpa bikin semuanya dari awal</span></li>
+                    </ul>
+                </div>
+                <div class="fc bad rv d1"><div class="ft2">− Kurang cocok untuk</div><h3>Kurang cocok kalau kamu cari layanan custom penuh</h3><p>Digistry bukan jasa pembuatan produk eksklusif dari nol.</p>
+                    <ul class="ls">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Kamu ingin semua produk dibuat 100% dari nol secara eksklusif</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Kamu berharap hasil instan tanpa mau belajar jualan</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6 6 18"/></svg><span>Kamu butuh lisensi eksklusif dan layanan custom penuh</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> kenapa lebih meyakinkan</span>
+                <h2>Kenapa paket ini lebih gampang dipahami dan dibeli?</h2>
+                <p>Karena orang cepat paham apa yang mereka dapat dan kenapa harganya masuk akal.</p>
+            </div>
+            <div class="g2">
+                <div class="ic2 rv"><div class="iw" style="background:rgba(110,215,234,.12);color:var(--cy)">⚡</div><h3>Orang cepat paham isinya</h3><p>Dari awal sudah kelihatan ini produk apa, buat siapa, dan kenapa cocok buat yang ingin mulai cepat.</p></div>
+                <div class="ic2 rv d1"><div class="iw" style="background:rgba(13,150,104,.12);color:var(--gn)">🔒</div><h3>Risikonya terasa lebih ringan</h3><p>Satu harga, lisensi jelas, dan support bikin orang lebih tenang waktu memutuskan beli.</p></div>
+                <div class="ic2 rv"><div class="iw" style="background:rgba(255,107,53,.09);color:#ff6b35">🧭</div><h3>Tidak beli lalu bingung</h3><p>Ada tempat bertanya kalau kamu mentok, jadi setelah bayar kamu tetap punya arah.</p></div>
+                <div class="ic2 rv d1"><div class="iw" style="background:rgba(236,72,153,.08);color:#EC4899">🎯</div><h3>Keputusannya simpel</h3><p>Tidak perlu habis waktu bandingin paket A, B, atau C.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct" id="testi">
+        <div class="stats-wide">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> testimoni</span>
+                <h2>Yang disukai banyak orang dari Digistry biasanya sederhana</h2>
+                <p>Mereka suka karena tidak harus mulai dari nol dan tetap punya tempat bertanya.</p>
+            </div>
+            <div class="tg">
+                <div class="tc rv"><div class="ts">★★★★★</div><p class="tt">"Awalnya cuma cari bahan jualan yang tidak ribet. Setelah masuk, saya pilih satu template Canva, rapikan sedikit, upload ke Shopee. Minggu kedua sudah ada yang beli."</p><div class="ta"><div class="av" style="background:var(--bl)">RA</div><div><div class="an">Rina Amelia</div><div class="ar">Freelancer, Bandung</div><div class="rb">mulai dapat orderan rutin di Shopee</div></div></div></div>
+                <div class="tc rv d1"><div class="ts">★★★★★</div><p class="tt">"Yang bikin saya berani beli itu karena lisensinya dijelaskan dan ada tempat tanya. Cukup 2 penjualan template, modal sudah balik."</p><div class="ta"><div class="av" style="background:#8B5CF6">DS</div><div><div class="an">Dani Setiawan</div><div class="ar">Mahasiswa, Jakarta</div><div class="rb">balik modal dari 2 penjualan</div></div></div></div>
+                <div class="tc rv d2"><div class="ts">★★★★★</div><p class="tt">"Saya ibu rumah tangga, nggak paham teknologi. Tapi panduannya simpel dan bimbingannya sabar. Sekarang jual e-book lewat WhatsApp."</p><div class="ta"><div class="av" style="background:var(--gn)">MF</div><div><div class="an">Maya Fitriani</div><div class="ar">IRT, Surabaya</div><div class="rb">punya penghasilan sendiri dari rumah</div></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct">
+        <div class="ct">
+            <div class="rf rv">
+                <p style="font-size:.86rem;color:var(--txf);text-align:center;margin-bottom:.2rem">Coba hitung sendiri</p>
+                <div class="rg">
+                    <div class="rc"><strong style="color:var(--cy)">Rp 99.000</strong><span>Modal kamu</span></div>
+                    <div class="rvs">vs</div>
+                    <div class="rc"><strong style="color:var(--gn)">Rp 150.000</strong><span>Cukup jual 2 template</span></div>
+                </div>
+                <p style="font-size:.92rem;font-weight:700;text-align:center;line-height:1.4">2 penjualan = modal kembali. Selanjutnya profit bersih.</p>
+                <div class="vr"><span class="vc">E-book <b>~Rp 500rb</b></span><span class="vc">Template <b>~Rp 400rb</b></span><span class="vc">Toolkit <b>~Rp 300rb</b></span><span class="vc">Panduan <b>~Rp 800rb</b></span></div>
+                <p style="font-size:.8rem;color:var(--txf);text-align:center;margin-top:.5rem">Total nilai paket Rp 2jt+ — kamu dapat seharga Rp 99.000</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sc" id="pricing">
+        <div class="ct pw">
+            <div class="sh c rv"><span class="ki"><span class="dot"></span> harga &amp; akses</span>
+                <h2>Satu akses yang cukup buat mulai jualan</h2>
+                <p>Tidak ada paket A, B, atau C. Cukup ambil satu akses, masuk, lalu pilih yang cocok.</p>
+            </div>
+            <div class="oi rv d1">
+                <div class="mi2"><strong>Isinya gampang dicek</strong><span>Dari awal sudah kelihatan kamu dapat apa.</span></div>
+                <div class="mi2"><strong>Lisensinya lebih jelas</strong><span>Hak pakainya dijelaskan supaya lebih tenang.</span></div>
+                <div class="mi2"><strong>Setelah bayar tidak bingung</strong><span>Masuk, pilih satu produk, lalu mulai jual.</span></div>
+            </div>
+            <div class="card-glow">
+                <div class="card-inner">
+                    <div class="oc rv d2">
+                        <div class="otr">
+                            <div class="oh"><div class="otl">Digistry Masterkit</div><div class="osb">Satu akses untuk stok produk digital, lisensi yang lebih jelas, panduan langkah awal, bahan promosi, dan support.</div></div>
+                            <div class="ob2">AKSES TUNGGAL</div>
+                        </div>
+                    </div>
+                    <div class="op"><span class="rp">Rp</span><span class="nm">99.000</span></div>
+                    <div class="om">Sekali bayar • akses instan • tanpa biaya bulanan</div>
+                    <div class="ops"><span class="opl">1 produk, 1 keputusan</span><span class="opl">Tanpa paket bertingkat</span><span class="opl">Bisa mulai dari 1 produk dulu</span></div>
+                    <div class="ogg">
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Stok siap pilih</strong><span>500+ produk digital yang bisa dipilih bertahap.</span></div></div>
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Lisensi lebih jelas</strong><span>PLR/MRR disertai penjelasan hak pakai dan hak jual.</span></div></div>
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Mulai lebih gampang</strong><span>Ada panduan langkah awal sampai produk siap ditawarkan.</span></div></div>
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Promosi tidak mulai kosong</strong><span>Bahan promosi sudah ada, tinggal dipakai.</span></div></div>
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Ada tempat tanya</strong><span>Bimbingan personal via chat saat kamu mentok.</span></div></div>
+                        <div class="oii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><div><strong>Akses tetap jalan</strong><span>Update produk baru + akses seumur hidup.</span></div></div>
+                    </div>
+                    <a href="https://digistry.myscalev.com/checkoutpage" class="btn bp bw" style="margin-top:1rem">Ambil Akses Digistry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <div class="ocn">Setelah bayar, kamu langsung masuk akses. Tidak perlu pilih paket lagi.</div>
+                    <div class="ab">
+                        <div class="as2"><span class="asn">1</span><strong>Masuk area akses</strong><span>Buka isi paket dan lihat kategori produk.</span></div>
+                        <div class="as2"><span class="asn">2</span><strong>Pilih satu produk dulu</strong><span>Ambil yang paling kamu paham supaya cepat jalan.</span></div>
+                        <div class="as2"><span class="asn">3</span><strong>Rapikan lalu tawarkan</strong><span>Pakai panduan, sesuaikan, lalu mulai jual.</span></div>
+                    </div>
+                    <div class="reb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><p>Bagian ini sengaja dibuat sesederhana mungkin: jelas isinya, jelas lisensinya, dan jelas langkah awalnya setelah checkout.</p></div>
+                    <div class="gub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg><p>Kalau setelah masuk kamu merasa isinya tidak sesuai ekspektasi, langsung chat kami. Kami bantu carikan solusinya.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sct" id="faq">
+        <div class="ct">
+            <div class="sh rv"><span class="ki"><span class="dot"></span> faq</span>
+                <h2>Beberapa pertanyaan yang biasanya muncul sebelum checkout</h2>
+                <p>Singkat supaya enak dibaca di HP dan langsung menjawab hal yang paling sering ditanyakan.</p>
+            </div>
+            <div class="fl rv d1">
+                <div class="fi open"><button class="fb" type="button"><span>Saya benar-benar pemula. Bisa mulai dari sini?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="fp"><div class="fpi">Bisa. Mulai dari produk yang paling mudah kamu pahami dulu, lalu rebrand seperlunya. Tujuannya bukan langsung sempurna, tapi mulai jalan dulu.</div></div></div>
+                <div class="fi"><button class="fb" type="button"><span>Apa saya harus jago desain dulu?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="fp"><div class="fpi">Tidak harus. Fokus awalnya bukan desain yang rumit, tapi bisa rapikan nama, cover, atau tampilan dasar supaya lebih enak dijual.</div></div></div>
+                <div class="fi"><button class="fb" type="button"><span>Bisa dijual lewat mana saja?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="fp"><div class="fpi">Bisa lewat WhatsApp, Instagram, marketplace, atau website sendiri. Mulai saja dari channel yang paling ringan.</div></div></div>
+                <div class="fi"><button class="fb" type="button"><span>Kenapa cuma satu harga?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="fp"><div class="fpi">Biar simpel. Kamu tidak perlu habis waktu membandingkan paket. Tinggal lihat isinya, cocok, lalu ambil.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fct">
+        <div class="ct rv" style="max-width:760px;margin:0 auto;position:relative">
+            <span class="ki"><span class="dot"></span> siap mulai</span>
+            <h2 style="font-size:clamp(1.8rem,4vw,3rem);line-height:1.04;letter-spacing:-.05em;font-weight:800;margin:.9rem 0 .7rem;text-wrap:balance">Kalau kamu mau mulai jualan digital tanpa mulai dari nol, Digistry bisa jadi langkah pertama yang paling ringan</h2>
+            <p style="font-size:1rem;color:var(--txm);max-width:62ch;margin:0 auto">Ambil aksesnya, pilih produk yang cocok, lalu mulai jalan pelan-pelan.</p>
+            <div class="fca"><a href="https://digistry.myscalev.com/checkoutpage" class="btn bp">Ambil Akses Digistry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a href="#inside" class="btn bs">Lihat Lagi Isi Paket</a></div>
+            <p style="font-size:.82rem;color:var(--txf);margin-top:.85rem">Akses instan • Sekali bayar • Tanpa paket bertingkat</p>
+        </div>
+    </section>
+
+    <div class="stb" id="stickyBuy">
+        <div class="stc">
+            <div class="stcp"><strong>Digistry Masterkit</strong><span>Rp 99.000 • akses instan • sekali bayar</span></div>
+            <div class="stp">Rp 99.000</div>
+            <a href="https://digistry.myscalev.com/checkoutpage" class="btn bp">Ambil Akses</a>
+        </div>
+    </div>
+
+    <script>
+        const rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+        document.querySelectorAll('.rv').forEach(el => { if(rm){el.classList.add('v');return} new IntersectionObserver((e,o)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');o.unobserve(en.target)}});},{threshold:.12,rootMargin:'0px 0px -30px 0px'}).observe(el) });
+        document.querySelectorAll('.fi').forEach(item => { const btn=item.querySelector('.fb'),panel=item.querySelector('.fp'); const sh=()=>panel.style.maxHeight=panel.scrollHeight+'px'; if(item.classList.contains('open'))sh(); btn.addEventListener('click',()=>{ const isO=item.classList.contains('open'); document.querySelectorAll('.fi').forEach(o=>{o.classList.remove('open');o.querySelector('.fp').style.maxHeight=null}); if(!isO){item.classList.add('open');sh()} }) });
+        window.addEventListener('resize',()=>{document.querySelectorAll('.fi.open .fp').forEach(p=>{p.style.maxHeight=p.scrollHeight+'px'})},{passive:true});
+        const ac=(el)=>{ const raw=Number(el.dataset.count); if(!raw||el.dataset.done)return; el.dataset.done='1'; const dur=1200,start=performance.now(); const fmt=(v)=>{if(raw>=1000)return(v/1000).toFixed(v>=raw?1:0).replace('.0','')+'K+';return Math.round(v).toLocaleString('id-ID')+'+'}; const step=(now)=>{const p=Math.min((now-start)/dur,1),e=1-Math.pow(1-p,3),c=raw*e;el.textContent=fmt(c);if(p<1)requestAnimationFrame(step);else el.textContent=raw>=1000?(raw/1000).toFixed(1).replace('.0','')+'K+':raw.toLocaleString('id-ID')+'+'}; requestAnimationFrame(step) };
+        document.querySelectorAll('[data-count]').forEach(el=>{ const o=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){ac(en.target);o.unobserve(en.target)}});},{threshold:.6}); el._o=o; o.observe(el) });
+        const stb=document.getElementById('stickyBuy'),hero=document.querySelector('.hero-new'),pricing=document.getElementById('pricing'),fctEl=document.querySelector('.fct');
+        const isMob=()=>window.innerWidth<=767;
+        const inV=(el)=>{if(!el)return false;const r=el.getBoundingClientRect();return r.top<window.innerHeight*.9&&r.bottom>window.innerHeight*.2};
+        const tgl=()=>{if(!isMob()){stb.classList.remove('show');return} const past=window.scrollY>hero.offsetHeight*.55; const hide=inV(pricing)||inV(fctEl); stb.classList.toggle('show',past&&!hide)};
+        window.addEventListener('scroll',tgl,{passive:true});window.addEventListener('resize',tgl);tgl();
+    </script>
+
+    <footer class="footer-clean">
+        <div class="ct footer-wrap">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-box"><img src="logo.jpeg" alt="Digistry Logo"></div>
+                    <div><strong>Digistry</strong><span>stok produk digital siap jual</span></div>
+                </div>
+                <p>Mulai jualan produk digital tanpa harus bikin dari nol.</p>
+            </div>
+            <div class="footer-nav">
+                <h4>Halaman</h4>
+                <a href="#inside">Isi</a><a href="#testi">Testimoni</a>
+                <a href="#pricing">Liat Harga</a><a href="#faq">FAQ</a>
+            </div>
+            <div class="footer-social">
+                <h4>Social Media</h4>
+                <a href="https://www.instagram.com/digistry.id/">Instagram</a><a href="https://www.tiktok.com/@digistryindonesia">TikTok</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 Digistry</div>
+    </footer>
+</body>
+</html>
