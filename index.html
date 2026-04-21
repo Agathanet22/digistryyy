@@ -236,7 +236,26 @@
         .bc { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
         .bm { display:inline-flex; align-items:center; gap:.42rem; padding:.38rem .65rem; border-radius:999px; font-size:.77rem; font-weight:800; margin-bottom:.7rem }
         .sc2 { background:var(--sf); border:1px solid var(--bd); border-radius:var(--rl); padding:1.15rem; box-shadow:var(--shs) }
-        .sn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; font-size:.9rem; font-weight:800; background:rgba(110,215,234,.12); color:var(--cy); margin-bottom:.75rem }
+       .sn{
+        width:44px;
+        height:44px;
+        border-radius:50%;
+
+        display:grid;
+        place-items:center;
+
+        padding:0;
+        margin:0 0 .85rem 0;
+
+        font-size:1.05rem;
+        font-weight:800;
+        line-height:1;
+
+        background:rgba(110,215,234,.12);
+        color:var(--cy);
+
+        flex-shrink:0;
+        }
         .sab { max-width:720px; margin:0 auto; padding:1.35rem; border-radius:24px; background:rgba(110,215,234,.04); border:2px dashed rgba(110,215,234,.18); text-align:center }
         .sag { display:grid; grid-template-columns:repeat(3,1fr); gap:.78rem; margin-bottom:.4rem }
         .sai { padding:1rem .8rem; border-radius:18px; text-align:center; background:var(--sf); border:1px solid var(--bd); box-shadow:var(--shs) }
@@ -423,6 +442,528 @@
 
 .wa-icon:hover {
   transform: scale(1.1);
+}
+
+/* ===============================
+   SAFE FIX ONLY (tidak ubah desain lain)
+=============================== */
+
+/* 1. Bulatan nomor center */
+.sn,
+.asn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+
+  display:grid !important;
+  place-items:center !important;
+
+  padding:0 !important;
+  line-height:1 !important;
+  font-weight:800;
+  font-size:1rem;
+}
+
+/* 2. Section #fit biar tidak kelebaran */
+#fit .ct{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+/* 3. Mobile only */
+@media(max-width:767px){
+
+  #fit .ct{
+    max-width:none;
+    width:calc(100% - 1.2rem);
+  }
+
+  .sn,
+  .asn{
+    width:38px;
+    height:38px;
+    font-size:.9rem;
+  }
+
+}
+
+/* ==================================
+   MOBILE RESPONSIVE DIGISTRY
+   tidak ganggu desktop
+================================== */
+
+@media (max-width: 768px){
+
+/* ===== Container ===== */
+.ct,
+.stats-wide{
+  width: calc(100% - 1rem);
+  margin: 0 auto;
+}
+
+/* ===== Navbar ===== */
+:root{
+  --nh: 64px;
+}
+
+.nav{
+  height: var(--nh);
+}
+
+.nav-i{
+  padding: 0 .4rem;
+  gap: .5rem;
+}
+
+.br strong{
+  font-size: .95rem;
+}
+
+.br span{
+  display:none;
+}
+
+/* tombol navbar */
+.nav .btn{
+  padding: 0 .9rem;
+  min-height: 42px;
+  font-size: .9rem;
+}
+
+/* ===== Hero ===== */
+.hero-new{
+  padding: 2.2rem .5rem 0;
+}
+
+.hero-headline{
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+  max-width: 10ch;
+}
+
+.hero-sub{
+  font-size: .95rem;
+  line-height: 1.6;
+  max-width: 95%;
+  margin: auto;
+}
+
+/* bullet pill */
+.hero-pills{
+  gap: .55rem;
+  margin-top: 1rem;
+}
+
+.hero-pill{
+  font-size: .8rem;
+  padding: .65rem .8rem;
+}
+
+/* ===== Showcase ===== */
+.showcase-track{
+  gap: 12px;
+}
+
+.showcase-item{
+  width: 135px;
+  height: 190px;
+  border-radius: 16px;
+}
+
+/* ===== Stats ===== */
+.pg{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  border-radius: 20px;
+}
+
+.pi{
+  padding: 18px 10px;
+}
+
+.pi .n{
+  font-size: 1.45rem;
+}
+
+.pi .l{
+  font-size: .82rem;
+}
+
+/* ===== Section heading ===== */
+.sh h2{
+  font-size: clamp(1.8rem,7vw,2.4rem);
+  line-height:1.15;
+}
+
+.sh p{
+  font-size:.95rem;
+}
+
+/* ===== Semua Grid jadi 1 kolom ===== */
+.g2,
+.g3,
+.sb,
+.pcg,
+.oi,
+.ab,
+.sag,
+.tg{
+  grid-template-columns:1fr !important;
+  gap:16px;
+}
+
+/* ===== Card ===== */
+.pc,
+.bc,
+.fc,
+.tc,
+.ic2,
+.pn{
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* ===== Number badge ===== */
+.sn,
+.asn{
+  width:38px;
+  height:38px;
+  font-size:.9rem;
+}
+
+/* ===== Floating WA ===== */
+.wa-float{
+  right:16px;
+  bottom:16px;
+}
+
+.wa-icon{
+  width:54px;
+  height:54px;
+}
+
+}
+
+
+/* ===== SMALL PHONE ===== */
+@media (max-width: 420px){
+
+.hero-headline{
+  font-size: 1.75rem;
+}
+
+.hero-sub{
+  font-size: .9rem;
+}
+
+.showcase-item{
+  width:120px;
+  height:175px;
+}
+
+.hero-pill{
+  width:100%;
+  justify-content:center;
+}
+
+/* ===== Brand Navbar ===== */
+.br{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.br img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+/* text wrapper */
+.br > div{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height:1.1;
+}
+
+.br strong{
+    display:block;
+    font-size:1rem;
+    font-weight:800;
+}
+
+.br span{
+    display:block;
+    font-size:.72rem;
+    opacity:.72;
+    margin-top:2px;
+    line-height:1.15;
+}
+}
+/* ===== FOOTER ONLY FIX ===== */
+
+.footer-brand .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.footer-brand .logo-box img{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+/* text kanan logo */
+.footer-brand .logo > div:last-child{
+    display:flex;
+    flex-direction:column;
+    line-height:1.12;
+}
+
+.footer-brand .logo strong{
+    display:block;
+    font-size:1rem;
+    font-weight:800;
+    margin:0;
+}
+
+.footer-brand .logo span{
+    display:block;
+    font-size:.78rem;
+    opacity:.72;
+    margin-top:2px;
+}
+
+/* =========================================
+   MOBILE ONLY FIX
+   Tidak mengubah desktop
+========================================= */
+
+@media (max-width: 768px){
+
+/* ===== GLOBAL ===== */
+html,body{
+  overflow-x:hidden;
+}
+
+.ct,
+.stats-wide{
+  width:min(calc(100% - 1rem), 100%);
+  margin:auto;
+}
+
+/* ===== TEXT ===== */
+h1,h2,h3{
+  word-break:break-word;
+}
+
+p{
+  line-height:1.6;
+}
+
+/* ===== NAVBAR ===== */
+:root{
+  --nh:64px;
+}
+
+.nav{
+  height:var(--nh);
+}
+
+.nav-i{
+  gap:.5rem;
+  padding:0 .4rem;
+}
+
+.nl{
+  display:none; /* menu desktop disembunyikan di HP */
+}
+
+.nr .btn{
+  min-height:42px;
+  padding:0 .9rem;
+  font-size:.88rem;
+}
+
+/* ===== BRAND ===== */
+.br{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.br img{
+  width:38px;
+  height:38px;
+}
+
+.br strong{
+  font-size:.95rem;
+}
+
+.br span{
+  display:none;
+}
+
+/* ===== HERO ===== */
+.hero-new{
+  padding:2.2rem .6rem 0;
+}
+
+.hero-headline{
+  font-size:clamp(2rem,9vw,3rem);
+  line-height:1.08;
+  max-width:100%;
+}
+
+.hero-sub{
+  font-size:.95rem;
+  max-width:100%;
+}
+
+/* ===== PILLS ===== */
+.hero-pills{
+  flex-direction:column;
+  align-items:stretch;
+  gap:.6rem;
+}
+
+.hero-pill{
+  justify-content:center;
+  width:100%;
+}
+
+/* ===== SHOWCASE ===== */
+.showcase-track{
+  gap:12px;
+  overflow-x:auto;
+  padding-bottom:6px;
+}
+
+.showcase-item{
+  width:130px;
+  height:185px;
+  flex:0 0 auto;
+}
+
+/* ===== STATS ===== */
+.pg{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-radius:22px;
+}
+
+.pi{
+  padding:18px 10px;
+}
+
+.pi .n{
+  font-size:1.45rem;
+}
+
+.pi .l{
+  font-size:.82rem;
+}
+
+/* ===== ALL GRID TO 1 COL ===== */
+.g2,
+.g3,
+.sb,
+.pcg,
+.oi,
+.ab,
+.sag,
+.tg,
+.grid-fit{
+  grid-template-columns:1fr !important;
+  gap:16px;
+}
+
+/* ===== CARD ===== */
+.pc,
+.bc,
+.fc,
+.tc,
+.ic2,
+.pn,
+.fit-card{
+  padding:18px;
+  border-radius:20px;
+}
+
+/* ===== NUMBER BADGE ===== */
+.sn,
+.asn{
+  width:38px;
+  height:38px;
+  font-size:.9rem;
+}
+
+/* ===== IMAGE / VIDEO ===== */
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  width:100%;
+  justify-content:center;
+}
+
+/* ===== FOOTER ===== */
+.footer-wrap{
+  grid-template-columns:1fr !important;
+  gap:24px;
+}
+
+.footer-nav{
+  display:grid;
+  gap:10px;
+}
+
+/* ===== WA BUTTON ===== */
+.wa-float{
+  right:16px;
+  bottom:16px;
+}
+
+.wa-icon{
+  width:54px;
+  height:54px;
+}
+
+}
+
+/* ===== EXTRA SMALL PHONE ===== */
+@media (max-width: 420px){
+
+.hero-headline{
+  font-size:1.75rem;
+}
+
+.hero-sub{
+  font-size:.9rem;
+}
+
+.showcase-item{
+  width:118px;
+  height:170px;
+}
+
+.pi .n{
+  font-size:1.3rem;
+}
+
+.btn{
+  font-size:.85rem;
+}
+
 }
     </style>
 </head>
