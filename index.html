@@ -940,28 +940,115 @@ img{
 
 }
 
-/* ===== EXTRA SMALL PHONE ===== */
-@media (max-width: 420px){
+/* =================================
+   MOBILE UX FIX PREMIUM
+================================= */
+@media (max-width:768px){
+
+/* ===== Hero ===== */
+.hero-new{
+  padding:1.2rem .9rem 0;
+}
 
 .hero-headline{
-  font-size:1.75rem;
+  font-size:2.1rem !important;
+  line-height:1.08;
+  letter-spacing:-.03em;
+  max-width:100%;
 }
 
 .hero-sub{
-  font-size:.9rem;
+  font-size:1rem;
+  line-height:1.55;
+  margin-top:1rem;
 }
 
+/* ===== Pills ===== */
+.hero-pills{
+  margin-top:1.2rem;
+  gap:.7rem;
+}
+
+.hero-pill{
+  padding:.8rem 1rem;
+  font-size:.92rem;
+}
+
+/* ===== Showcase ===== */
 .showcase-item{
-  width:118px;
-  height:170px;
+  width:110px !important;
+  height:155px !important;
 }
 
-.pi .n{
-  font-size:1.3rem;
+/* ===== Stats ===== */
+.pg{
+  margin-top:1rem;
 }
 
-.btn{
-  font-size:.85rem;
+.pi{
+  padding:14px 10px;
+}
+
+/* ===== Section spacing ===== */
+.sc,
+.sct{
+  padding:3rem 0 !important;
+}
+
+/* ===== Pricing Card ===== */
+.price-card,
+.pricing-box,
+.pn{
+  padding:22px !important;
+  min-height:auto !important;
+}
+
+.price-card .top,
+.pricing-box .top{
+  margin-bottom:1rem;
+}
+
+/* hapus ruang kosong gede */
+.price-card *{
+  margin-bottom:auto;
+}
+
+/* tombol CTA */
+.btn,
+.bp{
+  min-height:48px;
+  font-size:1rem;
+}
+
+/* ===== WhatsApp ===== */
+.wa-float{
+  right:14px;
+  bottom:90px; /* naik biar ga nutup browser bar */
+}
+
+.wa-icon{
+  width:56px;
+  height:56px;
+}
+
+/* ===== Navbar ===== */
+.nav{
+  height:64px;
+}
+
+.nav .btn{
+  padding:0 1rem;
+  min-height:44px;
+  font-size:.92rem;
+}
+
+.br strong{
+  font-size:1rem;
+}
+
+/* ===== Footer ===== */
+.footer-wrap{
+  gap:20px;
 }
 
 }
